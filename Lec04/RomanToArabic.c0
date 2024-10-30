@@ -28,8 +28,18 @@
     
 
     string convert_roman_number(string roman){
-        int arabic_number = 0;
-        
+        int arabic_number = 1;
+        int length_roman_number = string_length(roman);
+        arabic_number = return_number_char(roman);
+
+        for(int i=1; i< length_roman_number; i++){
+        string curr_roman_char = string_sub(roman,i,i+1);
+        string prev_roman_char = string_sub(roman,i-1,i);
+        printf("%s\n",curr_roman_char);
+        printf("%s\n",prev_roman_char);
+        arabic_number = return_number_char(curr_roman_char) + return_number_char(prev_roman_char);
+        }
+
         return string_fromint(arabic_number);
     }
 

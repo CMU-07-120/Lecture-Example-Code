@@ -3,5 +3,10 @@
 // string convert_roman_number(string roman){
 
 int main(){
+        assert(string_equal(convert_roman_number("I"),"1"));
+        assert(string_equal(convert_roman_number("II"),"2"));
+        assert(string_equal(convert_roman_number("V"),"5"));
+        assert(string_equal(convert_roman_number("XV"),"15"));
+
         return 0;
     }
