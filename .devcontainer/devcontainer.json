@@ -3,6 +3,9 @@
 {
 	"name": "ghcr",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "ghcr.io/cmu-07-120/intro-to-software-construction:latest"
+	"image": "ghcr.io/cmu-07-120/intro-to-software-construction:latest",
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {}
+	}
 
 }
