@@ -1,0 +1,45 @@
+#use <conio>
+#use <string>
+
+    int return_number_char(string roman_char){
+        if(string_equal(roman_char,"I")){
+                return(1);
+            }
+            if(string_equal(roman_char,"V")){
+                return(5);
+            }
+            if(string_equal(roman_char,"X")){
+                return(10);
+            }
+            if(string_equal(roman_char,"C")){
+               return(100);
+            }
+            if(string_equal(roman_char,"L")){
+                return(50);
+            }
+            if(string_equal(roman_char,"M")){
+                return(1000);
+            }
+            if(string_equal(roman_char,"D")){
+                return(500);
+            }
+            return(0);
+    }
+    
+
+    string convert_roman_number(string roman){
+        int arabic_number = 0;
+        
+        return string_fromint(arabic_number);
+    }
+
+    int main_interactive(){
+        println("-------------------");
+        println("Please enter a Roman Number");
+        string roman_number = readline();
+        string arabic_number = convert_roman_number(roman_number);
+        printf("Arabic Number is: %s\n",arabic_number);
+        println("-------------------");
+
+        return 0;
+    }
