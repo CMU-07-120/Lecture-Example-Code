@@ -1,0 +1,137 @@
+#use <conio>
+#use <string>
+#use <parse>
+
+
+bool game_over(int[] board){
+    for(int i = 0; i < 25; i++){
+        if(board[i] == 1){
+            return false;
+        }
+    }
+    return true;
+}
+
+int get_index(int row, int col)
+//@requires (0 <= row) && (row < 5);
+//@requires (0 <= col) && (col < 5);
+{
+    return (row * 5) + col;
+}
+
+bool take_shot(int []board, int row, int col)
+//@requires row >= 0 && row < 5 && col >= 0 && col < 5;
+{
+    int index = get_index(row, col);
+    if (board[index] == 1)
+    {
+        board[index] = 2;
+        return true;
+    }
+    else if (board[index] == 0)
+    {
+        board[index] = 3;
+        return false;
+    }
+    else if (board[index] == 2 || board[index] == 3)
+    {
+        return false;
+    }
+    return false;
+}
+
+
+void initialize_board(int[] board)
+//@requires \length(board) == 25;
+{
+    //setting board to be an array with all 0s 
+    for (int i = 0; i < 25; i++){
+        board[i] = 0;
+    }
+}
+
+void place_ship(int[] board, int row, int col)
+//@requires 0 <= row && row <= 4;
+//@requires 0 <= col && col <= 4;
+{
+    int idx = (row * 5) + col;
+    if (board[idx] != 1){
+        board[idx] = 1;
+        printf("Ship placed at board[%d] from row: %d and col %d\n",
+               idx, row, col);
+    }
+    else{
+        printf("Error: Ship already Present at board[%d]\n", idx);
+    }
+    return;
+}
+
+
+void print_board(int [] board){
+    string state_icon = "";
+    for(int row = 0; row < 5; row++){
+        for (int col = 0; col < 5; col++){
+            int state = board[row*5 + col];
+            if( state == 0)
+                state_icon = "_";
+            if( state == 1)
+                state_icon = "_";
+            if( state == 2)
+                state_icon = "X";
+            if( state == 3)
+                state_icon = "M";               
+            printf(" [ %s ] ", state_icon);
+        }
+        print("\n");
+    }
+}
+
+
+
+
+// Main function
+int main() {
+
+    //Grid size is 5*5 = 25
+    int[] board = alloc_array(int,25);
+
+
+    initialize_board(board);
+
+    // Place a few ships for demonstration
+    place_ship(board, 1, 1);
+    place_ship(board, 2, 3);
+    place_ship(board, 4, 4);
+
+    // Display the board initially (for testing; remove for real play)
+    printf("Initial board (hidden for players in real play):\n");
+    print_board(board);
+
+    while(true){
+    printf("Please input row:");
+    string row = readline();
+    printf("Please input column:");
+    string column = readline();
+    //printf("%d",char_ord(string_charat(row,0)));
+    //printf("char:%d",char_ord(string_charat(column,0)));
+    printf("guess row:%d guess column: %d\n",char_ord(string_charat(row,0))-48,char_ord(string_charat(column,0))-48);
+    take_shot(board,char_ord(string_charat(row,0))-48,char_ord(string_charat(column,0))-48);
+    printf("\nBoard after shot:\n");
+    print_board(board);
+
+    
+    if(game_over(board)){
+            printf("GAME OVER");
+            return 1;
+        }else{
+            printf("\n\n");
+        }
+    }
+
+
+    // Display the board after shots
+    printf("\nBoard after shots:\n");
+    print_board(board);
+
+    return 0;
+}
